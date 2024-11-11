@@ -6,6 +6,9 @@ import Jobs from "./components/Jobs";
 import Browse from "./components/Browse";
 import Profile from "./components/Profile";
 import JobDescription from "./components/JobDescription";
+import Companies from "./components/admin/Companies";
+import AdminJobs from "./components/admin/AdminJobs";
+import CreateCompany from "./components/admin/CreateCompany";
 
 const appRouter = createBrowserRouter([
   {
@@ -35,6 +38,20 @@ const appRouter = createBrowserRouter([
   {
     path: "/description/:id",
     element: <JobDescription />,
+  },
+
+  ////////admin
+  {
+    path: "/admin/companies",
+    element: <Companies />,
+  },
+  {
+    path: "/admin/jobs",
+    element: <AdminJobs />,
+  },
+  {
+    path: "/admin/companies/create",
+    element: <CreateCompany />,
   },
 ]);
 function App() {

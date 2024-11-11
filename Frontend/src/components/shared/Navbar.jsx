@@ -36,15 +36,28 @@ function Navbar() {
       </h1>
       <div className="flex items-center gap-12">
         <ul className="flex text-xl font-bold items-center gap-5">
-          <Link to="/">
-            <li>Home</li>
-          </Link>
-          <Link to="/jobs">
-            <li>Jobs</li>
-          </Link>
-          <Link to="/browse">
-            <li>Browse</li>
-          </Link>
+          {user && user.role == "recruiter" ? (
+            <>
+              <Link to="/admin/companies">
+                <li>Companies</li>
+              </Link>
+              <Link to="/admin/jobs">
+                <li>Jobs</li>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/">
+                <li>Home</li>
+              </Link>
+              <Link to="/jobs">
+                <li>Jobs</li>
+              </Link>
+              <Link to="/browse">
+                <li>Browse</li>
+              </Link>
+            </>
+          )}
         </ul>
         {!user ? (
           <div className="flex items-center gap-2 h-5 ">
@@ -90,12 +103,17 @@ function Navbar() {
                 </div>
               </div>
               <div className="flex flex-col text-gray-600">
-                <div className="flex w-fit items-center gap-2 cursor-pointer">
-                  <User2 />
-                  <Button variant="link">
-                    <Link to="/profile">View Profile</Link>
-                  </Button>
-                </div>
+                {user && user.role == "student" && (
+                  <>
+                    <div className="flex w-fit items-center gap-2 cursor-pointer">
+                      <User2 />
+                      <Button variant="link">
+                        <Link to="/profile">View Profile</Link>
+                      </Button>
+                    </div>
+                  </>
+                )}
+
                 <div className="flex w-fit items-center gap-2 cursor-pointer">
                   <LogOut />
                   <Button onClick={logOutHandler} variant="link">

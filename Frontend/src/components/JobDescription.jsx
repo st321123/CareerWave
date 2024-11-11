@@ -12,11 +12,7 @@ function JobDescription() {
   const { id } = useParams();
   const [job, setJob] = useState(null);
   const { user } = useSelector((store) => store.auth);
-  const [applied, setApplied] = useState(
-    job?.applications?.some(
-      (application) => application.applicant === user?._id
-    )
-  );
+  const [applied, setApplied] = useState(false);
 
   const applyButtonHandler = async () => {
     try {
@@ -42,9 +38,9 @@ function JobDescription() {
         if (res.data.success) {
           setJob(res.data.job);
           setApplied(
-            job?.applications?.some(
-              (application) => application.applicant === user?._id
-            )
+            res.data.job?.applications?.some((application) => {
+              return application.applicant === user?._id;
+            })
           );
         }
       } catch (error) {
@@ -53,7 +49,6 @@ function JobDescription() {
     };
     fetchSingleJob();
   }, [id]);
-
   return (
     <div>
       <Navbar />
@@ -135,6 +130,12 @@ function JobDescription() {
               </span>
             </h1>
             <h1 className="font-bold my-1">
+              Total Applicants:
+              <span className="pl-4 font-normal text-gray-800">
+                {job?.applications?.length}
+              </span>
+            </h1>
+            <h1 className="font-bold my-1">
               Date Posted:
               <span className="pl-4 font-normal text-gray-800">
                 {job?.createdAt.split("T")[0]}
@@ -148,3 +149,18 @@ function JobDescription() {
 }
 
 export default JobDescription;
+
+// _id
+// 6731c71a30f7a37e13149442
+// job
+// 67318730ec7904e76f0111a9
+// applicant
+// 67301ef61c3a7cf9dfab56b0
+// status
+// "Pending"
+// createdAt
+// 2024-11-11T08:58:02.520+00:00
+// updatedAt
+// 2024-11-11T08:58:02.520+00:00
+// __v
+// 0
