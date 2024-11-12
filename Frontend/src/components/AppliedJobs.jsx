@@ -9,9 +9,18 @@ import {
   TableRow,
 } from "./ui/table";
 import { Badge } from "./ui/badge";
+import { useSelector } from "react-redux";
 
-const AppliedJobsData = [1, 2, 3, 4];
 function AppliedJobs() {
+  const { allJobs } = useSelector((store) => store.job);
+  const { user } = useSelector((store) => store.auth);
+
+  const appliedJobData = allJobs?.filter((job) => {
+    return job?.applications?.some((application) => {
+      return application.applicant === user?._id;
+    });
+  });
+
   return (
     <div>
       <Table>
@@ -25,7 +34,7 @@ function AppliedJobs() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {AppliedJobsData.map((item, index) => {
+          {appliedJobData.map((item, index) => {
             return (
               <TableRow key={index}>
                 <TableCell>12nov2024</TableCell>

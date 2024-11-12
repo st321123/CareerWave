@@ -7,27 +7,40 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { companyUrl } from "@/utils/constants";
 import { toast } from "sonner";
+import { useDispatch } from "react-redux";
+import { setSingleCompany } from "@/redux/companySlice";
+import { Loader2 } from "lucide-react";
 
 function CreateCompany() {
   const navigate = useNavigate();
   const [companyName, setCompanyName] = useState();
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const onInputChange = (e) => {
     setCompanyName(e.target.value);
   };
   const registerNewCompany = async () => {
     try {
-      const res = await axios.post(`${companyUrl}/register`, companyName, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
+      setLoading(true);
+      const res = await axios.post(
+        `${companyUrl}/register`,
+        { companyName },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
       if (res?.data?.success) {
-        toast.success();
+        dispatch(setSingleCompany(res.data.company));
+        toast.success(res?.data?.message);
         const companyId = res?.data?.company?._id;
         navigate(`/admin/companies/${companyId}`);
       }
     } catch (error) {
       console.log(error);
+      toast.error(error?.response?.data?.message);
     }
+    setLoading(false);
   };
   return (
     <div>
@@ -41,7 +54,8 @@ function CreateCompany() {
         </div>
         <Label>Company Name</Label>
         <Input
-          onChange={(e) => onInputChange}
+          value={companyName}
+          onChange={onInputChange}
           type="text"
           className="my-2 rounded"
           placeholder="Google, Microsoft etc."
@@ -54,12 +68,23 @@ function CreateCompany() {
           >
             Cancel
           </Button>
-          <Button
-            variant="outline"
-            className="rounded-xl bg-[#1995AD] text-white"
-          >
-            Continue
-          </Button>
+          {loading ? (
+            <Button
+              variant="outline"
+              className="rounded-xl bg-[#1995AD] text-white my-10"
+            >
+              <Loader2 className="animate-spin mr-2 hover:text-black" />
+              Please Wait
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              className="rounded-xl bg-[#1995AD] text-white my-10"
+              onClick={registerNewCompany}
+            >
+              Continue
+            </Button>
+          )}
         </div>
       </div>
     </div>

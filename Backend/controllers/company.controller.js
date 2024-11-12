@@ -40,7 +40,7 @@ export const getCompany = async (req, res) => {
         success: false,
       });
     }
-    return res.status(200).json(companies);
+    return res.status(200).json({ companies, success: true });
   } catch (error) {
     console.log(error);
   }
@@ -68,8 +68,13 @@ export const getCompanyById = async (req, res) => {
 export const updateCompany = async (req, res) => {
   try {
     const { name, description, website, location } = req.body;
-    const file = req.file;
-
+    //const file = req.file;
+    if (!name || !description || !website || !location) {
+      return res.status(404).json({
+        message: "All fields are required.",
+        success: false,
+      });
+    }
     const updateData = { name, description, website, location };
     const company = await Company.findByIdAndUpdate(req.params.id, updateData);
     if (!company) {
@@ -78,8 +83,10 @@ export const updateCompany = async (req, res) => {
         success: false,
       });
     }
+    await company.save();
     return res.status(200).json({
       message: "Company data Updated succssfully",
+      company,
       success: true,
     });
   } catch (error) {
