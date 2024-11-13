@@ -15,7 +15,9 @@ function Companies() {
   useEffect(() => {
     dispatch(setSearchCompanyByText(search));
   }, [search]);
+
   useGetAllCompanies();
+
   return (
     <div>
       <Navbar />

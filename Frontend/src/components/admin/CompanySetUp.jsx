@@ -29,7 +29,7 @@ function CompanySetUp() {
       website: singleCompany?.website || "",
       location: singleCompany?.location || "",
     });
-  }, []);
+  }, [singleCompany]);
   const [loading, setLoading] = useState(false);
 
   const changeEventHandler = (e) => {

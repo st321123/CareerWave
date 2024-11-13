@@ -13,7 +13,7 @@ import { Edit2, MoreHorizontal } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-function CompaniesTable() {
+function JobsTable() {
   const navigate = useNavigate();
   const { companies, searchCompanyByText } = useSelector(
     (store) => store.company
@@ -54,14 +54,6 @@ function CompaniesTable() {
               {filterSearch?.map((company) => {
                 return (
                   <tr key={company._id}>
-                    <TableCell>
-                      <Avatar>
-                        <AvatarImage
-                          className="h-10"
-                          src="https://st3.depositphotos.com/43745012/44906/i/450/depositphotos_449066958-stock-photo-financial-accounting-logo-financial-logo.jpg"
-                        />
-                      </Avatar>
-                    </TableCell>
                     <TableCell>{company.name}</TableCell>
                     <TableCell>{company.createdAt.split("T")[0]}</TableCell>
                     <TableCell className="text-right cursor-pointer">
@@ -91,4 +83,4 @@ function CompaniesTable() {
   );
 }
 
-export default CompaniesTable;
+export default JobsTable;

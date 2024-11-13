@@ -58,6 +58,10 @@ const appRouter = createBrowserRouter([
     path: "/admin/companies/:id",
     element: <CompanySetUp />,
   },
+  {
+    path: "/admin/jobs",
+    element: <AdminJobs />,
+  },
 ]);
 function App() {
   return (
