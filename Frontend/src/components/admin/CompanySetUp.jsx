@@ -70,7 +70,10 @@ function CompanySetUp() {
           </Button>
           <h1 className="font-bold text-xl">Company Setup</h1>
         </div>
-        <form onSubmit={submitHandler}>
+        <form
+          onSubmit={submitHandler}
+          className="p-8 max-w-4xl border border-gray-200 shadow bg-white"
+        >
           <div className="grid grid-cols-2 gap-4">
             <div>
               <Label>Company Name</Label>

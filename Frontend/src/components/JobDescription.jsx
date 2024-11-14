@@ -96,7 +96,13 @@ function JobDescription() {
             <h1 className="font-bold my-1">
               Role:
               <span className="pl-4 font-normal text-gray-800">
-                {job?.role}
+                {job?.title}
+              </span>
+            </h1>
+            <h1 className="font-bold my-1">
+              Requirements:
+              <span className="pl-4 font-normal text-gray-800">
+                {job?.requirements}
               </span>
             </h1>
             <h1 className="font-bold my-1">

@@ -45,10 +45,12 @@ function CompaniesTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filterSearch?.length <= 0 ? (
-            <h1>
+          {!companies ? (
+            <h1 className="text-2xl font-bold">
               You haven't registered any company yet.<span>Register Now</span>
             </h1>
+          ) : filterSearch?.length <= 0 ? (
+            <h1 className="text-2xl font-bold">No such company found.</h1>
           ) : (
             <>
               {filterSearch?.map((company) => {

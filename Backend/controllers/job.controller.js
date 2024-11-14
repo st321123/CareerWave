@@ -13,7 +13,7 @@ export const createJob = async (req, res) => {
     const {
       title,
       description,
-      role,
+      requirements,
       salary,
       location,
       jobType,
@@ -25,7 +25,7 @@ export const createJob = async (req, res) => {
     if (
       !title ||
       !description ||
-      !role ||
+      !requirements ||
       !salary ||
       !location ||
       !jobType ||
@@ -42,7 +42,7 @@ export const createJob = async (req, res) => {
     const job = await Job.create({
       title,
       description,
-      role,
+      requirements,
       salary,
       location,
       jobType,
@@ -66,7 +66,7 @@ export const updateJob = async (req, res) => {
     const {
       title,
       description,
-      role,
+      requirements,
       salary,
       location,
       jobType,
@@ -77,7 +77,7 @@ export const updateJob = async (req, res) => {
     if (
       !title ||
       !description ||
-      !role ||
+      !requirements ||
       !salary ||
       !location ||
       !jobType ||
@@ -94,7 +94,7 @@ export const updateJob = async (req, res) => {
     const job = await Job.findByIdAndUpdate(req.params.id, {
       title,
       description,
-      role,
+      requirements,
       salary,
       location,
       jobType,
@@ -148,8 +148,9 @@ export const getAllJob = async (req, res) => {
 export const adminJobs = async (req, res) => {
   try {
     const adminId = req.id;
-
-    const jobs = await Job.find({ createdBy: adminId });
+    const jobs = await Job.find({ createdBy: adminId }).populate({
+      path: "company",
+    });
     if (!jobs) {
       return res
         .status(404)

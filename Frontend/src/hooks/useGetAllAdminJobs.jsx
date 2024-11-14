@@ -14,7 +14,7 @@ function useGetAllAdminJobs() {
         });
 
         if (res.data.success) {
-          dispatch(setAllAdminJobs(res.data.companies));
+          dispatch(setAllAdminJobs(res.data.jobs));
         }
       } catch (error) {
         console.log(error);
