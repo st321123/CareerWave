@@ -18,6 +18,7 @@ import {
 import { toast } from "sonner";
 import { jobUrl } from "@/utils/constants";
 import axios from "axios";
+import { setLoading } from "@/redux/authSlice";
 
 function CreateJobs() {
   const [jobData, setJobData] = useState({
@@ -33,6 +34,9 @@ function CreateJobs() {
     experience: "",
   });
   const { companies } = useSelector((store) => store.company);
+
+  const navigate = useNavigate();
+  const { loading } = useSelector((store) => store.auth);
   const changeEventHandler = (e) => {
     setJobData({ ...jobData, [e.target.name]: e.target.value });
   };
@@ -44,7 +48,7 @@ function CreateJobs() {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(jobData);
+    setLoading(true);
     try {
       const res = await axios.post(`${jobUrl}/create`, jobData, {
         headers: { "Content-Type": "application/json" },
@@ -58,9 +62,9 @@ function CreateJobs() {
       toast.error(error.response.data.message);
       console.log(error);
     }
+    setLoading(false);
   };
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+
   return (
     <div>
       <Navbar />

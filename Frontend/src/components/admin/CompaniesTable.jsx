@@ -76,7 +76,7 @@ function CompaniesTable() {
                             onClick={() => navigate(`${company?._id}`)}
                             className="flex items-center gap-2 w-fit cursor-pointer text-gray-600"
                           >
-                            <Edit2 />
+                            <Edit2 className="w-4" />
                             <span>Edit</span>
                           </div>
                         </PopoverContent>
