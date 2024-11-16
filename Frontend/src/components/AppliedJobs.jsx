@@ -12,15 +12,7 @@ import { Badge } from "./ui/badge";
 import { useSelector } from "react-redux";
 
 function AppliedJobs() {
-  const { allJobs } = useSelector((store) => store.job);
-  const { user } = useSelector((store) => store.auth);
-
-  const appliedJobData = allJobs?.filter((job) => {
-    return job?.applications?.some((application) => {
-      return application.applicant === user?._id;
-    });
-  });
-
+  const { appliedJobs } = useSelector((store) => store.job);
   return (
     <div>
       <Table>
@@ -34,18 +26,28 @@ function AppliedJobs() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {appliedJobData.map((item, index) => {
-            return (
-              <TableRow key={index}>
-                <TableCell>12nov2024</TableCell>
-                <TableCell>frontend</TableCell>
-                <TableCell>google</TableCell>
-                <TableCell className="text-right">
-                  <Badge className="text-green-600">accepted</Badge>
-                </TableCell>
-              </TableRow>
-            );
-          })}
+          {appliedJobs.length == 0 ? (
+            <span>You haven't applied any job yet.</span>
+          ) : (
+            appliedJobs.map((item, index) => {
+              return (
+                <TableRow key={item._id}>
+                  <TableCell>{item.createdAt.split("T")[0]}</TableCell>
+                  <TableCell>{item.job.title}</TableCell>
+                  <TableCell>{item.job.company.name}</TableCell>
+                  <TableCell className="text-right">
+                    {item.status == "Accepted" ? (
+                      <Badge className="text-green-600">{item.status}</Badge>
+                    ) : item.status == "Rejected" ? (
+                      <Badge className="text-red-600">{item.status}</Badge>
+                    ) : (
+                      <Badge className="text-yellow-600">{item.status}</Badge>
+                    )}
+                  </TableCell>
+                </TableRow>
+              );
+            })
+          )}
         </TableBody>
       </Table>
     </div>

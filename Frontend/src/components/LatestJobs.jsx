@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import JobCard from "./JobCard";
 import { useSelector } from "react-redux";
 
@@ -11,7 +11,7 @@ function LatestJobs() {
       </h1>
       <div className="grid grid-cols-3 gap-4 my-5 ">
         {allJobs.length ? (
-          allJobs.slice(0, 6).map((item, index) => {
+          allJobs.slice(0, 6).map((item) => {
             return <JobCard key={item._id} job={item} />;
           })
         ) : (

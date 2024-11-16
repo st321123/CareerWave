@@ -19,7 +19,6 @@ function ApplicantsTable() {
   const applicationArray = applicants?.applications;
   const status = ["Accepted", "Rejected"];
   const updateStatus = async (status, Id) => {
-    console.log("....", Id);
     try {
       const res = await axios.post(
         `${applicationUrl}/update/status/${Id}`,

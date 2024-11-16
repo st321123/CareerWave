@@ -8,12 +8,11 @@ import { useNavigate } from "react-router-dom";
 function Job({ job }) {
   const daysAgo = (mongodbTime) => {
     const createdAt = new Date(mongodbTime);
-    const currentTime = new Date(mongodbTime);
-    const timeDiff = createdAt - currentTime;
-    return Math.floor((timeDiff / 1000) * 24 * 60 * 60);
+    const currentTime = new Date();
+    const timeDiff = currentTime - createdAt;
+    return Math.floor(timeDiff / (1000 * 24 * 60 * 60));
   };
   const navigate = useNavigate();
-  const jobId = "sdfjk";
   return (
     <div className="w-[80%] mx-auto p-5 rounded shadow-xl bg-white border-gray-200">
       <div className="flex items-center justify-between">

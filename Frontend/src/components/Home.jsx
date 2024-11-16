@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import Navbar from "./shared/Navbar";
 import Post from "./Post";
-import CategoryCrousel from "./CategoryCrousel";
 import LatestJobs from "./LatestJobs";
 import Footer from "./Footer";
 import useGetAllJobs from "@/hooks/useGetAllJobs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -22,7 +21,6 @@ function Home() {
     <div>
       <Navbar />
       <Post />
-      <CategoryCrousel />
       <LatestJobs />
       <Footer />
     </div>

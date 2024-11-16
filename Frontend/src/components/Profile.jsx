@@ -8,10 +8,12 @@ import { Label } from "./ui/label";
 import AppliedJobs from "./AppliedJobs";
 import UpdateProfile from "./UpdateProfile";
 import { useSelector } from "react-redux";
+import useGetAppliedJobs from "@/hooks/useGetAppliedJobs";
 
 function Profile() {
   const [update, setUpdate] = useState(false);
   const { user } = useSelector((store) => store.auth);
+  useGetAppliedJobs();
   const haveResume = true;
   return (
     <div>
