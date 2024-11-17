@@ -18,8 +18,9 @@ app.use(cookieParser());
 const corsOptions = {
   origin: "https://careerwave-1.onrender.com",
   credentials: true,
+  origin: "http://localhost:5173", // Frontend URL
+  credentials: true,    
 };
-
 app.use(cors(corsOptions));
 
 const port = process.env.PORT || 3000;
