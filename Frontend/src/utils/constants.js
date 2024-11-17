@@ -1,5 +1,6 @@
-const API_URL = import.meta.env.API_URL;
-
+const API_URL =
+  import.meta.env.VITE_API_URL || "https://careerwave.onrender.com";
+console.log("base url...", API_URL);
 export const userUrl = `${API_URL}/api/v1/user`;
 export const jobUrl = `${API_URL}/api/v1/job`;
 export const applicationUrl = `${API_URL}/api/v1/application`;
