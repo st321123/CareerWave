@@ -10,8 +10,6 @@ function useGetAllJobs() {
   const { searchedQuery } = useSelector((store) => store.job);
   useEffect(() => {
     const fetchAllJobs = async () => {
-      console.log("dfsg", jobUrl);
-      console.log("xkyfdsihfkd");
       try {
         const res = await axios.get(
           `${jobUrl}/alljobs?keyword=${searchedQuery || ""}`,
